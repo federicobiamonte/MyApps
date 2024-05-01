@@ -8,12 +8,12 @@ class utility_functions:
         connection = sqlalchemy.create_engine('sqlite:///db.sqlite')
         return connection
 
-    def get_data_from_url(ROOT: str, filename:str, format: str) -> pd.DataFrame:
+    def get_data_from_url(ROOT: str, filename:str, format: str, separatore: str) -> pd.DataFrame:
         URL = f'{ROOT}/{filename}.{format}?raw=true'
         response = requests.get(URL)
         if response.status_code == 200:
             dati = requests.get(URL).content
-            dati_raw = pd.read_csv(io.StringIO(dati.decode('utf-8')))
+            dati_raw = pd.read_csv(io.StringIO(dati.decode('utf-8')), sep=separatore)
             return dati_raw
         else:
             print('Errore nel caricamento dei dati')   

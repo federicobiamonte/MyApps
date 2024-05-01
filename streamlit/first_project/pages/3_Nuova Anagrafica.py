@@ -5,17 +5,14 @@ import requests
 import io
 from utilities.utilities_lib import utility_functions as uf
 
-#leggi i dati dal seguente path: 'https://github.com/federicobiamonte/MyApps/blob/main/streamlit/first_project/data/stati.csv?raw=true'
 
-DATA_URL ='https://github.com/federicobiamonte/MyApps/blob/main/streamlit/first_project/data/stati.csv?raw=true'
+DATA_URL ='https://github.com/federicobiamonte/MyApps/blob/main/streamlit/first_project/data'
 
-df_nazioni = uf.get_data_from_url(DATA_URL, 'stati', 'csv')
-elenco_nazioni = df_nazioni['nome'].unique().tolist()
+df_nazioni = uf.get_data_from_url(DATA_URL, 'stati', 'csv', ',')
+elenco_nazioni = df_nazioni['nazione'].unique().tolist()
 
-df_regioni = uf.get_data_from_url(DATA_URL, 'regioni', 'csv')
+df_regioni = uf.get_data_from_url(DATA_URL, 'regioni', 'csv', ';')
 elenco_regioni = df_regioni['denominazione_regione'].unique().tolist()
-
-st.write(df_regioni)
 
 st.title('Modulo Inserimento Anagrafiche', anchor='left')
 
